@@ -18,7 +18,7 @@ def GetNE():
         except:
             continue
         tag = tag[:len(tag) - 1]
-        if tag in ('N', 'V'):
+        if tag in ('^'):
             word_tag.append((word, tag))
 
     return word_tag
@@ -32,13 +32,12 @@ def GetWikiLinks(word_tag):
     return word_links
 
 def ShowOutput(tweet, word_links):
-    print tweet
+    print "Input tweet" + '\t' + tweet
     for item in word_links:
         entity = item[0]
         links = item[1]
-        print entity
-        for link in links:
-            print '\t' + link
+        wikipage = wikipedia.page(links[0])
+        print '\t' + entity + '\t' + wikipage.url
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
